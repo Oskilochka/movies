@@ -1,17 +1,16 @@
-.App {
-    text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-header {
+.root {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
     min-height: 100vh;
 
-    color: white;
-    font-size: calc(10px + 2vmin);
+    color: lightgray;
 
-    background-color: #282c34;
+    background-color: #212121;
 }
