@@ -1,80 +1,78 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { ReviewForm } from "../ReviewForm";
-import api from "api/axiosConfig";
+import {  Movie, useGetMovie } from "api/movie.api";
+import { useAddReview } from "../../../api/review.api";
 
-type ReviewsProps = {
-  getMovieData: (movieId: string) => void,
-  movie: any,
-  reviews: any,
-  setReviews: any
-}
+export const Reviews = React.memo(() => {
+    const reviewText = useRef();
+    const { movieId } = useParams();
+    const [ reviews, setReviews ] = useState<any[]>([])
 
-export const Reviews = React.memo<ReviewsProps>((
-  {
-    getMovieData,
-    movie,
-    reviews,
-    setReviews,
-  },
-) => {
-  const reviewText = useRef();
-  const { movieId } = useParams();
+    const { mutate } = useAddReview();
 
-  React.useEffect(() => {
-    getMovieData(movieId!);
-  }, [ getMovieData, movieId ]);
+    const addReview = React.useCallback(async (e: any) => {
+        e.preventDefault();
+        const review: any = reviewText.current;
 
-  const addReview = React.useCallback(async (e: any) => {
-    e.preventDefault();
-    const review: any = reviewText.current;
+        try {
 
-    try {
-      await api.post("/api/v1/reviews",
-        {
-          reviewContent: review?.value,
-          imdbId: movieId,
-        });
+            mutate(
+                { reviewContent: review, imdbId: movieId || '' },
+                {
+                    onSuccess: (data) => {
+                        // Оновлюємо локальний стан після успішного додавання відгуку
+                        setReviews((oldReviews) => [ ...oldReviews, { body: review } ]);
+                        if (reviewText.current) {
+                            (reviewText.current as any).value = '';
+                        }
+                    },
+                }
+            );
 
-      const updatedReviews = [ ...reviews, { body: review?.value } ];
-      setReviews(updatedReviews);
-      review.value = "";
-    } catch (e) {
-      console.log(e);
-    }
+            const updatedReviews: any = [ ...reviews, { body: review?.value } ];
+            setReviews(updatedReviews);
+            review.value = "";
+        } catch (e) {
+            console.log(e);
+        }
 
-  }, [ setReviews, movieId, reviews ]);
+    }, [ mutate, movieId, reviews ]);
 
-  return (
-    <Container>
-      <Row>
-        <Col>
-          <p>Reviews</p>
-        </Col>
-      </Row>
-      <Row className="mt-2">
-        <Col>
-          <img src={movie?.poster} alt="poster" />
-        </Col>
-        <Col>
-          {
+    const { data } =  useGetMovie(movieId || "")
+
+    return (
+        <Container>
             <Row>
-              <Col>
-                <ReviewForm reviewText={reviewText} handleSubmit={addReview} labelText="Write a review" />
-              </Col>
-            </Row>
-          }
-          {
-            reviews?.map((review: any) =>
-              <Row>
-                <Col key={review?.imdbId}>
-                  {review?.body}
+                <Col>
+                    <p>Reviews</p>
                 </Col>
-              </Row>)
-          }
-        </Col>
-      </Row>
-    </Container>
-  );
-});
+            </Row>
+            <Row className="mt-2">
+                <Col>
+                    <img src={(data as Movie)?.poster} alt="poster" />
+                </Col>
+                <Col>
+                    {
+                        <Row>
+                            <Col>
+                                <ReviewForm reviewText={reviewText} handleSubmit={addReview}
+                                    labelText="Write a review" />
+                            </Col>
+                        </Row>
+                    }
+                    {
+                        (reviews as any)?.map((review: any) =>
+                            <Row>
+                                <Col key={review?.imdbId}>
+                                    {review?.body}
+                                </Col>
+                            </Row>)
+                    }
+                </Col>
+            </Row>
+        </Container>
+    );
+})
+;
