@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages";
-import { Header, Trailer } from "components";
-import { Reviews } from "./components/review";
+import { Header, Trailer, Reviews } from "components";
 import { ROUTES } from "./routes";
-import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import "./index.css";
 
 const queryClient = new QueryClient();
 

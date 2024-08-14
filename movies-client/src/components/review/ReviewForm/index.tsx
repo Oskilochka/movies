@@ -1,1 +1,1 @@
-export * from "./ReviewForm";
+export { ReviewForm } from "./ReviewForm";

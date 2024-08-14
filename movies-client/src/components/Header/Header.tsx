@@ -21,4 +21,5 @@ export const Header = React.memo(() =>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-    ));
+    )
+);

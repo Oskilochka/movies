@@ -1,37 +1,38 @@
+import { useCreateReview, useGetMovieById } from "api";
+import { Review } from "models/types";
 import React, { useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { ReviewForm } from "../ReviewForm";
-import {  Movie, useGetMovie } from "api/movie.api";
-import { useAddReview } from "../../../api/review.api";
 
 export const Reviews = React.memo(() => {
-    const reviewText = useRef();
+    const reviewText = useRef<HTMLTextAreaElement>(null);
     const { movieId } = useParams();
-    const [ reviews, setReviews ] = useState<any[]>([])
+    const [ reviews, setReviews ] = useState<Review[]>([])
 
-    const { mutate } = useAddReview();
+    const { data } = useGetMovieById(movieId || "")
+    const { mutate } = useCreateReview();
 
-    const addReview = React.useCallback(async (e: any) => {
+    const addReview = React.useCallback(async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        const review: any = reviewText.current;
+        const review = reviewText.current;
+
+        if (!review) return;
 
         try {
-
             mutate(
-                { reviewContent: review, imdbId: movieId || '' },
+                { reviewContent: review?.value, imdbId: movieId || '' },
                 {
-                    onSuccess: (data) => {
-                        // Оновлюємо локальний стан після успішного додавання відгуку
-                        setReviews((oldReviews) => [ ...oldReviews, { body: review } ]);
+                    onSuccess: () => {
+                        setReviews((oldReviews) => [ ...oldReviews, { body: review?.value } ]);
                         if (reviewText.current) {
-                            (reviewText.current as any).value = '';
+                            reviewText.current.value = '';
                         }
                     },
                 }
             );
 
-            const updatedReviews: any = [ ...reviews, { body: review?.value } ];
+            const updatedReviews = [ ...reviews, { body: review?.value } ];
             setReviews(updatedReviews);
             review.value = "";
         } catch (e) {
@@ -40,39 +41,33 @@ export const Reviews = React.memo(() => {
 
     }, [ mutate, movieId, reviews ]);
 
-    const { data } =  useGetMovie(movieId || "")
 
     return (
         <Container>
             <Row>
-                <Col>
-                    <p>Reviews</p>
-                </Col>
+                <Col><p>Reviews</p></Col>
             </Row>
             <Row className="mt-2">
+                <Col><img src={data?.poster} alt="poster" /></Col>
                 <Col>
-                    <img src={(data as Movie)?.poster} alt="poster" />
-                </Col>
-                <Col>
-                    {
+                    {<Row>
+                        <Col>
+                            <ReviewForm
+                                reviewText={reviewText}
+                                handleSubmit={addReview}
+                                labelText="Write a review"
+                            />
+                        </Col>
+                    </Row>}
+                    {reviews?.map(review =>
                         <Row>
-                            <Col>
-                                <ReviewForm reviewText={reviewText} handleSubmit={addReview}
-                                    labelText="Write a review" />
+                            <Col key={review?.id}>
+                                {review?.body}
                             </Col>
                         </Row>
-                    }
-                    {
-                        (reviews as any)?.map((review: any) =>
-                            <Row>
-                                <Col key={review?.imdbId}>
-                                    {review?.body}
-                                </Col>
-                            </Row>)
-                    }
+                    )}
                 </Col>
             </Row>
         </Container>
     );
-})
-;
+});

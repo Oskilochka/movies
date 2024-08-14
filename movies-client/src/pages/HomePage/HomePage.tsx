@@ -1,33 +1,25 @@
 import React from "react";
 import { Paper } from "@mui/material";
 import Carousel from "react-material-ui-carousel";
-// import api from "api/axiosConfig";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import styles from "./style.module.scss";
-import { getMovies, Movie, useMoviesList } from "../../api/movie.api";
-import { useApiGet } from "api/axiosConfig";
+import { Movie } from "models/types";
+import { useGetMovies } from "api";
 
 export const HomePage = React.memo(() => {
-    // const [ movies, setMovies ] = React.useState([]);
     const navigate = useNavigate();
+    const { data, isLoading } = useGetMovies()
+
     const reviews = (movieId: string) => {
         navigate(`/reviews/${movieId}`);
     };
 
-    const { data, isLoading } = useMoviesList()
-
-    console.log(data, isLoading)
-
     if (isLoading) {
         return <div>Loading</div>;
     }
-
-    // if (isError || isLoadingError) {
-    //     return <div>Error</div>
-    // }
 
     return (
         <Carousel className={styles.carousel}>

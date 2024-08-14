@@ -1,11 +1,11 @@
-import React from "react";
+import React, { RefObject } from "react";
 import { Button, Form } from "react-bootstrap";
 
 type ReviewFormProps = {
-    defaultValue?: any,
-    reviewText: any,
-    handleSubmit: any,
-    labelText: string
+    handleSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+    labelText: string,
+    defaultValue?: string,
+    reviewText?: RefObject<HTMLTextAreaElement> | null,
 }
 
 export const ReviewForm = React.memo<ReviewFormProps>((
