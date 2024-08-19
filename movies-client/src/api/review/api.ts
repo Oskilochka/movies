@@ -1,7 +1,8 @@
-import axios, { AxiosResponse } from "axios";
 import { apiAxios } from "api/config";
-import { CreateReviewPayload } from "./types";
+import axios, { AxiosResponse } from "axios";
 import { Review } from "models/types";
+
+import { CreateReviewPayload } from "./types";
 
 export const fetchReviews = async () => {
     const { data, status }: AxiosResponse<Review> = await apiAxios.get('/reviews');

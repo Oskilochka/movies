@@ -1,13 +1,17 @@
 import React from "react";
-import { Paper } from "@mui/material";
-import Carousel from "react-material-ui-carousel";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import styles from "./style.module.scss";
-import { Movie } from "models/types";
+
+import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Paper } from "@mui/material";
 import { useGetMovies } from "api";
+import { Movie } from "models/types";
+import { Button } from "react-bootstrap";
+import Carousel from "react-material-ui-carousel";
+
+
+import styles from "./style.module.scss";
+
 
 export const HomePage = React.memo(() => {
     const navigate = useNavigate();

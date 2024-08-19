@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { fetchMovies, fetchMovieById } from './api';
 
 export const useGetMovies = () => {

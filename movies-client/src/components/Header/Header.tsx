@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, Container, Nav, Navbar, NavLink } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faVideoSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Container, Nav, Navbar, NavLink } from "react-bootstrap";
 
 export const Header = React.memo(() =>
     (

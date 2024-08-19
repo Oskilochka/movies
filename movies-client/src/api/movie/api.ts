@@ -1,5 +1,5 @@
-import { AxiosResponse } from "axios";
 import { apiAxios } from "api/config";
+import { AxiosResponse } from "axios";
 import { Movie } from "models/types";
 
 export const fetchMovies = async () => {

@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+
 import ReactPlayer from "react-player";
 
 import styles from './style.module.scss'

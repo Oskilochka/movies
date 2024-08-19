@@ -1,8 +1,10 @@
+import React, { useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import { useCreateReview, useGetMovieById } from "api";
 import { Review } from "models/types";
-import React, { useRef, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+
 import { ReviewForm } from "../ReviewForm";
 
 export const Reviews = React.memo(() => {
@@ -60,7 +62,7 @@ export const Reviews = React.memo(() => {
                         </Col>
                     </Row>}
                     {reviews?.map(review =>
-                        <Row>
+                        <Row key={review?.id}>
                             <Col key={review?.id}>
                                 {review?.body}
                             </Col>
