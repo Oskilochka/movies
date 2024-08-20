@@ -1,33 +1,54 @@
 {
   "name": "movies-client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.11",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.4",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint": "eslint --fix src/**/*.{ts,tsx}"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "@emotion/react": "11.10.5",
+    "@emotion/styled": "11.10.5",
+    "@fortawesome/free-solid-svg-icons": "6.2.1",
+    "@fortawesome/react-fontawesome": "0.2.0",
+    "@mui/material": "5.11.5",
+    "@tanstack/react-query": "5.51.21",
+    "axios": "1.2.3",
+    "bootstrap": "5.2.3",
+    "postcss": "8.4.40",
+    "postcss-scss": "4.0.9",
+    "react": "18.2.0",
+    "react-bootstrap": "2.7.0",
+    "react-dom": "18.2.0",
+    "react-material-ui-carousel": "3.4.2",
+    "react-player": "2.11.0",
+    "react-router-dom": "6.7.0",
+    "react-scripts": "5.0.1",
+    "typescript": "4.9.4",
+    "web-vitals": "2.1.4"
   },
+  "devDependencies": {
+    "@testing-library/react": "13.4.0",
+    "@testing-library/user-event": "13.5.0",
+    "@types/node": "16.18.11",
+    "@types/react": "18.0.27",
+    "@types/react-dom": "18.0.10",
+    "@typescript-eslint/eslint-plugin": "6.0.0",
+    "@typescript-eslint/parser": "6.0.0",
+    "eslint": "8.0.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-import": "2.27.0",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint-plugin-react": "7.32.0",
+    "eslint-plugin-react-hooks": "4.6.0"
+  },
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": "src",
   "browserslist": {
     "production": [
       ">0.2%",
