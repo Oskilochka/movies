@@ -41,6 +41,4 @@ public class Review {
     @Column(name = "updated_at", columnDefinition = "datetime2(6)")
     @LastModifiedDate
     private LocalDateTime updatedAt;
-
-//    private LocalDateTime timestamp = LocalDateTime.now();
 }

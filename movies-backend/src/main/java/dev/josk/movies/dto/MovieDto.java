@@ -19,5 +19,5 @@ public class MovieDto {
     private LocalDate releaseDate;
     private List<String> genres;
     private String imageUrl;
-    private Double averageRating; // Обчислюється на основі оцінок користувачів
+    private Double averageRating;
 }

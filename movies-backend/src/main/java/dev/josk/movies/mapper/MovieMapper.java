@@ -1,14 +1,14 @@
 package dev.josk.movies.mapper;
 
-import dev.josk.movies.dto.UserDto;
-import dev.josk.movies.entity.User;
+import dev.josk.movies.dto.MovieDto;
+import dev.josk.movies.entity.Movie;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
-    UserDto toDto(User user);
+public interface MovieMapper {
+    MovieDto toDto(Movie movie);
 
     @InheritInverseConfiguration
-    User toEntity(UserDto userDTO);
+    Movie toEntity(MovieDto movieDTO);
 }

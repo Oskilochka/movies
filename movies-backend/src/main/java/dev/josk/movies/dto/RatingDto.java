@@ -13,5 +13,5 @@ public class RatingDto {
     private Long id;
     private Long userId;
     private Long movieId;
-    private Integer score; // Значення від 1 до 10
+    private Integer score;
 }

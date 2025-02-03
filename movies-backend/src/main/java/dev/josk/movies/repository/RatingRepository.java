@@ -1,10 +1,11 @@
 package dev.josk.movies.repository;
 
-import dev.josk.movies.entity.Movie;
+import dev.josk.movies.entity.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 
-@Repository
-public interface RatingRepository extends JpaRepository<Movie, Long> {
+public interface RatingRepository extends JpaRepository<Rating, Long> {
+    Optional<Rating> findByUserIdAndMovieId(Long userId, Long movieId);
+    Optional<Double> getAverageRating(Long movieId);
 }

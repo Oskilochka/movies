@@ -49,7 +49,6 @@ public class Movie {
     @Column(name = "genre")
     private List<String> genres;
 
-
     private Double averageRating;
 
     private String posterUrl;
