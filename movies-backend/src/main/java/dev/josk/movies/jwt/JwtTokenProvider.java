@@ -32,8 +32,8 @@ public class JwtTokenProvider {
             throw new IllegalStateException("JWT Secret is not configured!");
         }
 
-        byte[] keyBytes = Base64.getDecoder().decode(jwtSecret);
-        this.key = Keys.hmacShaKeyFor(keyBytes);
+//        byte[] keyBytes = Base64.getDecoder().decode(jwtSecret);
+//        this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
     public String generateToken(Authentication authentication) {
