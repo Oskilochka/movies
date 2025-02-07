@@ -1,6 +1,5 @@
 package dev.josk.movies.jwt;
 
-import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -12,7 +11,6 @@ import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 
 @Component
