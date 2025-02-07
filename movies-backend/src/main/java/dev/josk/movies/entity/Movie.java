@@ -55,11 +55,11 @@ public class Movie {
 
     private String trailerUrl;
 
-    @Column(name = "created_at", columnDefinition = "datetime2(6)")
+    @Column(nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", columnDefinition = "datetime2(6)")
+    @Column(nullable = false)
     @LastModifiedDate
     private LocalDateTime updatedAt;
 }

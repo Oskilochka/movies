@@ -30,6 +30,6 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public Double getAverageRating(Long movieId) {
-        return ratingRepository.getAverageRating(movieId).orElse(0.0);
+        return ratingRepository.getScoreByMovieId(movieId).orElse(0.0);
     }
 }

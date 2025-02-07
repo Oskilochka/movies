@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ratings")
+@Table(name = "ratings", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "movie_id"}))
 @EntityListeners({AuditingEntityListener.class})
 public class Rating {
     @Id
@@ -40,13 +41,13 @@ public class Rating {
     private Movie movie;
 
     @Column(nullable = false)
-    private Double score;
+    private int rating;
 
-    @Column(name = "updated_at", columnDefinition = "datetime2(6)")
+    @Column(nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at", columnDefinition = "datetime2(6)")
+    @Column(nullable = false)
     @LastModifiedDate
     private LocalDateTime updatedAt;
 }

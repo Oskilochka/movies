@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    UserDto registerUser(UserDto userDto);
-    Optional<UserDto> getUserById(Long userId);
-    List<UserDto> getAllUsers();
-    void deleteUser(Long userId);
+    Optional<UserDto> getById(Long userId);
+    List<UserDto> getAll();
+    void deleteById(Long userId);
 }
