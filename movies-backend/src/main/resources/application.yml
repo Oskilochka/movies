@@ -17,3 +17,9 @@ server:
 jwt:
   secret: secretKey
   expiration: 86400000  # 24h in millis
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

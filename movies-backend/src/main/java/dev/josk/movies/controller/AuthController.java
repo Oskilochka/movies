@@ -4,6 +4,7 @@ import dev.josk.movies.entity.User;
 import dev.josk.movies.jwt.JwtTokenProvider;
 import dev.josk.movies.model.AuthResponse;
 import dev.josk.movies.model.LoginRequest;
+import dev.josk.movies.model.RegisterRequest;
 import dev.josk.movies.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,9 +36,18 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.badRequest().body("Email is already taken");
+        }
+
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
         userRepository.save(user);
+
         return ResponseEntity.ok("User registered successfully");
     }
 }

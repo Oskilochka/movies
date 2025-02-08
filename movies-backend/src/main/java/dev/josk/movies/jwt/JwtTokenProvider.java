@@ -1,5 +1,6 @@
 package dev.josk.movies.jwt;
 
+import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -29,9 +30,10 @@ public class JwtTokenProvider {
         if (jwtSecret == null || jwtSecret.isEmpty()) {
             throw new IllegalStateException("JWT Secret is not configured!");
         }
+    }
 
-//        byte[] keyBytes = Base64.getDecoder().decode(jwtSecret);
-//        this.key = Keys.hmacShaKeyFor(keyBytes);
+    public JwtTokenProvider(@Value("${jwt.secret}") String jwtSecret) {
+        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
     }
 
     public String generateToken(Authentication authentication) {
