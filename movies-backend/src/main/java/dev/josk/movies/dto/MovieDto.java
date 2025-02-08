@@ -18,6 +18,7 @@ public class MovieDto {
     private String description;
     private LocalDate releaseDate;
     private List<String> genres;
-    private String imageUrl;
     private Double averageRating;
+    private String posterUrl;
+    private String trailerUrl;
 }
