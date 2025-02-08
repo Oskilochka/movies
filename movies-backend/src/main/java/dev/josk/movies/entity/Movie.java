@@ -42,8 +42,6 @@ public class Movie {
 
     private String description;
 
-    private String releaseYear;
-
     @ElementCollection
     @CollectionTable(name = "movie_genres", joinColumns = @JoinColumn(name = "movie_id"))
     @Column(name = "genre")
