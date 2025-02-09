@@ -25,7 +25,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<ReviewDto> getReviewsByMovie(Long movieId) {
+    public List<ReviewDto> getReviewsByMovieId(Long movieId) {
         return commentRepository.findByMovieId(movieId).stream()
                 .map(commentMapper::toDto)
                 .collect(Collectors.toList());

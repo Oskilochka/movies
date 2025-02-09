@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ReviewService {
     ReviewDto addReview(ReviewDto reviewDto);
-    List<ReviewDto> getReviewsByMovie(Long movieId);
+    List<ReviewDto> getReviewsByMovieId(Long movieId);
 }
